@@ -49,7 +49,7 @@ check_sudo() {
 }
 
 ask_confirmation(){
-    if [ -n "${QUIET:-}" ]; then
+    if [[ ${QUIET:-0} = 1 ]]; then
         return 0
     fi
     exec </dev/tty >/dev/tty
@@ -121,7 +121,7 @@ shred_partition_table()
 {
     local path="${1}"
     if [[ $(command_exist wipefs) = 1 ]]; then
-        fmt "Detected command @@ok%s for shred the partition table of  @@ok%s\n" "wipefs" "${path}"
+        fmt "Detected command @@ok%s for shred the partition table of @@ok%s\n" "wipefs" "${path}"
         shred_partition_table_wipefs "${path}"
     fi
 
@@ -241,7 +241,7 @@ get_partition_name()
 
 parse_options()
 {
-    local OPTIND
+    local OPTIND option
     while getopts ":hq" option; do
         case $option in
             h) # display Help
@@ -307,7 +307,7 @@ main()
     check_command dd
     check_command mkfs.ext4
 
-    parse_options "$@" 
+    parse_options "$@"
     select_device 
 
     unmount_device_crypt_mapper_volume "${DEVICE_PATH}"
@@ -337,4 +337,4 @@ main()
     fmt "🎉 Done! You can copy files now to the directory @@ok%s\n" "${dir}"
 }
 
-main
+main "$@"

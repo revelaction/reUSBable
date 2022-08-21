@@ -52,7 +52,7 @@ Run the scrypt with `sudo`:
     
 If you want to avoid confirmation in each step, run the script with the flag `-q`
 
-    ⤷ sudo ./luks-usb-transporter.sh
+    ⤷ sudo ./luks-usb-transporter.sh -q
     [sudo] password for revelaction:
     1) DataTraveler_3.0          /dev/sde     B0C54E757496FFB3K9F2
     2) PC404 NVMe SK hynix 128GB /dev/nvme0n1 JJAN590010307L4V

@@ -5,6 +5,8 @@
 Those USB devices can then be used to securely 'transport' sensitive data
 between two computers, erasing any trace of previous data before each use.
 
+https://user-images.githubusercontent.com/96388231/185803287-0e45bbb9-0ffe-42f2-a7ee-52a4de452443.mp4
+
 `luks-usb-transporter` was tested on linux.
 
 # Installation 

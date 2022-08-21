@@ -56,3 +56,21 @@ If you want to avoid confirmation in each step, run the script with the flag `-q
     2) PC404 NVMe SK hynix 128GB /dev/nvme0n1 JJAN590010307L4V
     [./luks-usb-transporter.sh] Please select the device: 1
     ...
+
+
+# How it works
+
+`luks-usb-transporter` should be run after (and before) using it for secure
+transport of data between two computers.
+
+`luks-usb-transporter` performs the following actions in a given USB (or other data device):
+
+- It unmounts any previous partitions on the device.
+- It shreds the entire device with the command `shred` (if present) or `dd`.
+  This step can last many minutes/hours.
+- It shreds the partition table of the device with `wipefs` and `dd`.
+- It creates a new `gpt` partition table.
+- It creates one partition using 100% of the device.
+- It creates a LUKS2 partition on the previously create partition.
+- It opens the LUKS2 partition and creates a ext4 filesystem inside.
+- It mounts the filesystem in `/media/<user>`

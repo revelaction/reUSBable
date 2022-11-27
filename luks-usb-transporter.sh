@@ -242,13 +242,16 @@ get_partition_name()
 parse_options()
 {
     local OPTIND option
-    while getopts ":hq" option; do
+    while getopts ":hqu" option; do
         case $option in
             h) # display Help
                 usage
                 exit;;
             q) 
                 readonly QUIET=1
+                ;;
+            u) 
+                readonly UMOUNT=1
                 ;;
             \?) # Invalid option
                 echo "Error: Invalid option"
@@ -312,6 +315,12 @@ main()
 
     unmount_device_crypt_mapper_volume "${DEVICE_PATH}"
     unmount_device_partitions "${DEVICE_PATH}"
+
+    # Stop if -u flag
+    if [[ ${UMOUNT:-0} = 1 ]]; then
+        exit 0
+    fi
+
     shred_device "${DEVICE_PATH}"
     shred_partition_table "${DEVICE_PATH}"
     create_partition_table "${DEVICE_PATH}"

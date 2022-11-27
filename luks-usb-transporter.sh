@@ -344,6 +344,7 @@ main()
     mount_filesystem "${d_mapper_label}" "${previous_user}" "${dir}"
 
     fmt "🎉 Done! You can copy files now to the directory @@ok%s\n" "${dir}"
+    fmt "After that, umount the luks partition by runnin gthe script with the @@ok%s flag\n" "-u"
 }
 
 main "$@"

@@ -250,8 +250,8 @@ parse_options()
             q) 
                 readonly QUIET=1
                 ;;
-            u) 
-                readonly UMOUNT=1
+            m) 
+                readonly MOUNT=1
                 ;;
             \?) # Invalid option
                 echo "Error: Invalid option"
@@ -316,11 +316,6 @@ main()
     unmount_device_crypt_mapper_volume "${DEVICE_PATH}"
     unmount_device_partitions "${DEVICE_PATH}"
 
-    # Stop if -u flag
-    if [[ ${UMOUNT:-0} = 1 ]]; then
-        exit 0
-    fi
-
     shred_device "${DEVICE_PATH}"
     shred_partition_table "${DEVICE_PATH}"
     create_partition_table "${DEVICE_PATH}"
@@ -339,12 +334,19 @@ main()
 
     create_filesytem "${d_mapper_label}"
 
+    # Stop if not -m flag
+    if [[ ${MOUNT:-0} != 1 ]]; then
+        unmount_device_crypt_mapper_volume "${DEVICE_PATH}"
+        unmount_device_partitions "${DEVICE_PATH}"
+        fmt "🎉 Done!\n"
+        exit 0
+    fi
+
     readonly previous_user="$(logname)"
     readonly dir=/media/"${previous_user}"/"${d_mapper_label}"
     mount_filesystem "${d_mapper_label}" "${previous_user}" "${dir}"
 
     fmt "🎉 Done! You can copy files now to the directory @@ok%s\n" "${dir}"
-    fmt "After that, umount the luks partition by runnin gthe script with the @@ok%s flag\n" "-u"
 }
 
 main "$@"

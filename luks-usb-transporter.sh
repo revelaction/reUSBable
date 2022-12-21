@@ -335,6 +335,8 @@ select_device()
 main()
 {
     check_sudo
+    readonly previous_user="$(who am i | cut -d ' ' -f1)"
+
     check_command cryptsetup
     check_command lsblk
     check_command parted
@@ -373,7 +375,6 @@ main()
         exit 0
     fi
 
-    readonly previous_user="$(logname)"
     readonly dir=/media/"${previous_user}"/"${d_mapper_label}"
     mount_filesystem "${d_mapper_label}" "${previous_user}" "${dir}"
 

@@ -3,7 +3,8 @@ set -eu
 set -o pipefail
 
 readonly LUKS_TYPE='luks2'
-readonly EXCLUDED_DEVICES_MAJOR='7'
+# exclude mem devices from menu
+readonly EXCLUDED_DEVICES_MAJOR='1,7'
 readonly PROGNAME=$(basename $0)
 
 usage() {

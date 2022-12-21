@@ -266,7 +266,7 @@ select_device()
     readarray -t serial < <(lsblk -e "${EXCLUDED_DEVICES_MAJOR}" -x SERIAL -ndo SERIAL)
     readarray -t dev_path < <(lsblk -e "${EXCLUDED_DEVICES_MAJOR}" -x SERIAL -ndo PATH)
     readarray -t model < <(lsblk -e "${EXCLUDED_DEVICES_MAJOR}" -x SERIAL -ndo MODEL)
-    readarray -t humanReadable < <(lsblk -e "${EXCLUDED_DEVICES_MAJOR}" -x SERIAL -ndo MODEL,PATH,SERIAL)
+    readarray -t humanReadable < <(lsblk -e "${EXCLUDED_DEVICES_MAJOR}" -x SERIAL -ndo MODEL,PATH,SERIAL,SIZE)
 
     num_devices=${#dev_path[@]}
     if [ ${num_devices} -eq 0 ]; then

@@ -9,6 +9,10 @@ https://user-images.githubusercontent.com/96388231/185803287-0e45bbb9-0ffe-42f2-
 
 `luks-usb-transporter` was tested on linux.
 
+- [Installation](#installation)
+- [usage](#usage)
+- [How does it works](#how-does-it-work)
+
 # Installation 
 
 ## Install script
@@ -60,7 +64,7 @@ If you want to avoid confirmation in each step, run the script with the flag `-q
     ...
 
 
-# How it works
+# How does it works
 
 `luks-usb-transporter` should be run after (and before) using it for secure
 transport of data between two computers.

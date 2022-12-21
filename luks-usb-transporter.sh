@@ -4,6 +4,37 @@ set -o pipefail
 
 readonly LUKS_TYPE='luks2'
 readonly EXCLUDED_DEVICES_MAJOR='7'
+readonly PROGNAME=$(basename $0)
+
+usage() {
+    cat <<- EOF
+usage: ${PROGNAME:-} [<Options>]
+
+${PROGNAME:-} is a simple bash script to automate the creation of LUKS
+encrypted USB devices.
+
+Those USB devices can then be used to securely 'transport' sensitive data
+between two computers, erasing any trace of previous data before each use.
+
+Options:
+   -q Do not ask for confirmation (only the LUKS password will be requested)
+   -m Mount the LUKS partition after creation.
+   -h --help            Show this help
+
+
+Examples:
+   Shred the device, crete new partition while confirming each step:
+   $PROGNAME  
+
+   
+   Shred the device, crete new partition without confirming each step:
+   $PROGNAME -q 
+
+   
+   Shred the device, crete new partition. Mount the device after creation
+   $PROGNAME -m 
+EOF
+}
 
 command_exist() {
     local cmd="${1:-}"

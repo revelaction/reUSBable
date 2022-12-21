@@ -5,13 +5,14 @@
 Those USB devices can then be used to securely 'transport' sensitive data
 between two computers, erasing any trace of previous data before each use.
 
+- [Installation](#installation)
+- [usage](#usage)
+- [How does it work](#how-does-it-work)
+- [mount-luks.sh](#)
+
 https://user-images.githubusercontent.com/96388231/185803287-0e45bbb9-0ffe-42f2-a7ee-52a4de452443.mp4
 
 `luks-usb-transporter` was tested on linux.
-
-- [Installation](#installation)
-- [usage](#usage)
-- [How does it works](#how-does-it-work)
 
 # Installation 
 
@@ -64,7 +65,7 @@ If you want to avoid confirmation in each step, run the script with the flag `-q
     ...
 
 
-# How does it works
+# How does it work
 
 `luks-usb-transporter` should be run after (and before) using it for secure
 transport of data between two computers.
@@ -80,3 +81,7 @@ transport of data between two computers.
 - It creates a LUKS2 partition on the previously create partition.
 - It opens the LUKS2 partition and creates a ext4 filesystem inside.
 - It mounts the filesystem in `/media/<user>`
+
+#  mount-luks.sh
+
+`mount-luks.sh` is a companion script to mount and unmount the files created by `luks-usb-transporter`.

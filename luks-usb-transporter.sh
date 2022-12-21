@@ -24,15 +24,15 @@ Options:
 
 
 Examples:
-   Shred the device, crete new partition while confirming each step:
+   Shred the device, creete a new partition while confirming each step:
    $PROGNAME  
 
    
-   Shred the device, crete new partition without confirming each step:
+   Shred the device, create a new partition without confirming each step:
    $PROGNAME -q 
 
    
-   Shred the device, crete new partition. Mount the device after creation
+   Shred the device, create a new partition. Mount the device after creation
    $PROGNAME -m 
 EOF
 }
@@ -286,7 +286,8 @@ parse_options()
                 readonly MOUNT=1
                 ;;
             \?) # Invalid option
-                echo "Error: Invalid option"
+                fmt "Error: @@bad%s\n" "Invalid option"
+                usage
                 exit;;
         esac
     done

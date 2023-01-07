@@ -1,4 +1,4 @@
-# wreUSBable
+# reUSBable
 
 `reUSBable` is a simple `bash` script to automate the creation of LUKS encrypted USB devices. 
 

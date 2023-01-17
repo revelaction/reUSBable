@@ -352,7 +352,7 @@ main()
     unmount_device_crypt_mapper_volume "${DEVICE_PATH}"
     unmount_device_partitions "${DEVICE_PATH}"
 
-    #shred_device "${DEVICE_PATH}"
+    shred_device "${DEVICE_PATH}"
     shred_partition_table "${DEVICE_PATH}"
     create_partition_table "${DEVICE_PATH}"
     print_partition_table "${DEVICE_PATH}"

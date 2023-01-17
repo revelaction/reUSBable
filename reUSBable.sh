@@ -193,7 +193,8 @@ create_partition()
     local path="${1}"
     ask_confirmation "$(fmt "Press Enter to create @@ok%s in @@ok%s" "a new partition" "${path}")"
     #parted --align optimal ${1} mkpart primary ext4 0% 100%
-    parted ${path} mkpart primary 2048s 100%
+    #parted ${path} mkpart primary 2048s 100%
+    parted ${path} mkpart primary 0% 100%
 }
 
 print_partition_table()
@@ -351,7 +352,7 @@ main()
     unmount_device_crypt_mapper_volume "${DEVICE_PATH}"
     unmount_device_partitions "${DEVICE_PATH}"
 
-    shred_device "${DEVICE_PATH}"
+    #shred_device "${DEVICE_PATH}"
     shred_partition_table "${DEVICE_PATH}"
     create_partition_table "${DEVICE_PATH}"
     print_partition_table "${DEVICE_PATH}"
@@ -375,6 +376,7 @@ main()
 
     # Stop if not -m flag
     if [[ ${MOUNT:-0} == 0 ]]; then
+        sleep 3
         unmount_device_crypt_mapper_volume "${DEVICE_PATH}"
         unmount_device_partitions "${DEVICE_PATH}"
         fmt "🎉 Done!\n"

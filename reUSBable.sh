@@ -335,10 +335,26 @@ select_device()
     fmt "Choosen device has serial number 🔢  @@ok%s\n" "${DEVICE_SERIAL}"
 }
 
+get_previous_user()
+{
+    local uw="$(who am i | cut -d ' ' -f1)"
+    local ul="$(logname)"
+    if [ ! -z "${uw}" ]; then
+        echo -n "${uw}"
+        return 0
+    elif [ ! -z "${ul}" ]; then
+        echo -n "${ul}"
+        return 0
+    else
+        echo "Could not found previous user"
+        exit 1
+    fi
+}
+
 main()
 {
     check_sudo
-    readonly previous_user="$(who am i | cut -d ' ' -f1)"
+    readonly previous_user="$(get_previous_user)"
 
     check_command cryptsetup
     check_command lsblk
@@ -371,8 +387,8 @@ main()
     create_filesytem "${d_mapper_label}"
 
     # always mount for permissions
-    readonly dir=/media/"${previous_user}"/"${d_mapper_label}"
-    mount_filesystem "${d_mapper_label}" "${previous_user}" "${dir}"
+    readonly mount_dir=/media/"${previous_user}"/"${DEVICE_SERIAL}"
+    mount_filesystem "${d_mapper_label}" "${previous_user}" "${mount_dir}"
 
     # Stop if not -m flag
     if [[ ${MOUNT:-0} == 0 ]]; then
@@ -383,8 +399,7 @@ main()
         exit 0
     fi
 
-
-    fmt "🎉 Done! You can copy files now to the directory @@ok%s\n" "${dir}"
+    fmt "🎉 Done! You can copy files now to the directory @@ok%s\n" "${mount_dir}"
 }
 
 main "$@"

@@ -71,7 +71,7 @@ If you want to avoid confirmation in each step, run the script with the flag `-q
 1) DataTraveler_3.0          /dev/sde     B0C54E757496FFB3K9F2
 2) PC404 NVMe SK hynix 128GB /dev/nvme0n1 JJAN590010307L4V
 [./reUSBable.sh] Please select the device: 1
-...
+```
 
 # How does it work
 

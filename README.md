@@ -61,7 +61,7 @@ Run the scrypt with `sudo`:
 umount: /dev/sde1: not mounted.
 [./reUSBable.sh] Detected command shred for shred the device /dev/sde
 [./reUSBable.sh] Press Enter to shred device /dev/sde
-...
+```
     
 If you want to avoid confirmation in each step, run the script with the flag `-q`
 

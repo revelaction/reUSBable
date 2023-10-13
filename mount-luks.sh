@@ -245,6 +245,7 @@ main()
     readonly mount_dir=/media/"${previous_user}"/"${DEVICE_SERIAL}"
     mount_filesystem "${d_mapper_label}" "${previous_user}" "${mount_dir}"
 
+
     fmt "🎉 Done! You can copy files now to the directory @@ok%s\n" "${mount_dir}"
 }
 

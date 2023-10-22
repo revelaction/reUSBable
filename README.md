@@ -1,5 +1,7 @@
 <p align="center"><img alt="reUSBable" src="logo.png"/></p>
 
+[![GitHub Release](https://img.shields.io/github/v/release/revelaction/reUSBable?style=flat)]() 
+
 `reUSBable` is a simple bash script to automate the creation of LUKS encrypted USB devices. 
 
 The devices can then be used to securely 'transport' sensitive data
